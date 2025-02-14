@@ -32,7 +32,7 @@ def main():
     if len(sys.argv) !=2:     '''to display Usage instructions'''
         print("(+) Usage: %s <url>" % sys.argv[0])
         print("(+) Example: %s www.example.com" % sys.argv[0])
-        sys.exit(-1)         /*exit program*/
+        sys.exit(-1)         #exit program
 
     url = sys.argv[1]         #got the url argument correct
     print("(+) Retreiving administrator password...")
