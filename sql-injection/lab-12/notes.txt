@@ -10,9 +10,11 @@ Analysis:
 
 1) Prove that parameter is vulnerable
 
-' || (select '' from dual) || ' -> oracle database
+' || (select '') || ' -> error indicates db not sql
 
-' || (select '' from dualfiewjfow) || ' -> error
+' || (select '' from dual) || ' -> confirms oracle database
+
+' || (select '' from dualfiewjfow) || ' -> error indicates parameter is vulnerable and dualfiewjfow table doesn't exists
 
 2) Confirm that the users table exists in the database
 
