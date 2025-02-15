@@ -1,5 +1,7 @@
 Lab #16 - Blind SQL injection with out of band data exfiltration
 
+https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band-data-exfiltration
+
 Vulnerable parameter - tracking cookie
 
 End Goals:
