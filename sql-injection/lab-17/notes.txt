@@ -1,5 +1,6 @@
 Lab #17 - SQL injection with filter bypass via XML encoding
 
+https://portswigger.net/web-security/sql-injection/lab-sql-injection-with-filter-bypass-via-xml-encoding
 
 End Goal: Exploit SQL injection to retrieve the admin user's credentials from the users table and log into their account.
 
